@@ -1,0 +1,93 @@
+// == utilities == //
+.visually-hidden {
+  /* Remove the item from normal flow */
+  position: absolute;
+  /* Workaround for falsely pronounced, smushed text */
+  white-space: nowrap;
+  /* Set it to the smallest possible size (some screen readers ignore elements with zero height and width) */
+  width: 1px;
+  height: 1px;
+  /* Hide overflowing content after resizing */
+  overflow: hidden;
+  /* Reset any property that may change the elements size */
+  border: 0;
+  padding: 0;
+  /* Clipping defines what part of an element should be displayed. */
+  /* Deprecated clip property for older browsers */
+  clip: rect(0 0 0 0);
+  /* clip-path for newer browsers. inset(50%) defines an inset rectangle that makes the content disappear.  */
+  clip-path: inset(50%); 
+    /* It seems like at the moment nobody is quite sure why margin: -1px is there. On top of that it seems to cause issues (see: https://github.com/h5bp/html5-boilerplate/issues/1985). */
+  margin: -1px;
+}
+svg {
+  display: inline-block;
+  path, circle, ellipse, polygon, polyline { vector-effect: non-scaling-stroke; }
+}
+#main {
+  img[src*=".png"],
+  img[src*=".gif"],
+  img[src*=".jpeg"],
+  img[src*=".jpg"] {
+    display: inline-block;
+    font-size: 0;
+    &:after {
+      content: 'Broken image of ' attr(alt);
+      // content: url('../img/broken-chain.png') ' Broken image of ' attr(alt);
+      display: block;
+      width: 100%;
+      height: 0;
+      padding: 30% 20px 38%;
+      font-size: 16px;
+      text-align: center;
+      line-height: 1.3;
+      font-weight: 200;
+      color: $gray;
+      background: hsl(187, 0%, 94%);
+      box-sizing: border-box;
+    }
+  }
+  .ad img {
+    font-size: 1em;
+    &:after { display: none; }
+  }
+}
+
+
+.ad {
+  @include center();
+  margin: 0 auto em(20);
+  > div, > iframe, > a, > img { margin: auto; }
+}
+.container {
+  max-width: 1200px;
+  max-width: rem(1200px);
+  margin: 0 auto;
+  padding: 0 ($global-gutter/2);
+  box-sizing: border-box;
+  @include bp(500) { padding: 0 $global-gutter; }
+}
+// .clearfix { @extend %clearfix; }
+
+// == media ==
+.embedded-content {
+  margin-bottom: $global-gutter;
+  overflow: auto;
+  iframe { border: 0; }
+  .fluid {
+    &-wrapper {
+      position: relative;
+      height: 0;
+      overflow: hidden;
+    }
+    &-item {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+// == layout ==
